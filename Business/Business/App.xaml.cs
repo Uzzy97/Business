@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business.Data;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,12 +12,12 @@ namespace Business
         public App()
         {
             InitializeComponent();
-            Entries = new FileEntryStore();
+            Entries = new FileEntryStorage();
 
             MainPage = new NavigationPage(new Business.MainPage())
             {
-                BarBackgroundColor = Color.FromHex("#3498db"),
-                BarTextColor = Color.White
+                BarBackgroundColor = Color.FromHex("#000b3a"),
+                BarTextColor = Color.LightSlateGray
             };
         }
 

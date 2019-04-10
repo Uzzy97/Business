@@ -14,20 +14,20 @@ namespace Business
         {
             InitializeComponent();
 
-            enteries.ItemTapped += OnItemTapped;
+            entries.ItemTapped += OnItemTapped;
             newEntry.Completed += OnAddNewEntry;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            enteries.ItemsSource = await App.Entries.GetAllAsync();
+            entries.ItemsSource = await App.Entries.GetAllAsync();
         }
 
         private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var item = e.Item as INoteEntryStorage;
-            await Navigation.PushAsync(new NoteEntryEditPAge(item));
+            var item = e.Item as NoteTake;
+            await Navigation.PushAsync(new NoteEntryEditPage(item));
         }
 
 
@@ -36,11 +36,17 @@ namespace Business
             string text = newEntry.Text;
             if (!string.IsNullOrWhiteSpace(text))
             {
-                var item = new NoteEntry { Title = text };
+                var item = new NoteTake { Title = text };
                 await App.Entries.AddAsync(item);
-                await Navigation.PushAsync(new NoteEntryEditPAge(item));
+                await Navigation.PushAsync(new NoteEntryEditPage(item));
                 newEntry.Text = string.Empty;
             }
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Calculator());
+
         }
     }
 }

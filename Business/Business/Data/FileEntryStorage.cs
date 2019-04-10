@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Business.Data
 {
-    public class FileEntryStorage : INoteEntryStorage
+    public class FileEntryStorage: INoteEntryStorage
     {
         List<NoteTake> loadedNotes;
         string filename;
@@ -20,6 +20,8 @@ namespace Business.Data
                 folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             this.filename = Path.Combine(folder, "business.xml");
         }
+
+
         private async Task InitializeAsync()
         {
             if (loadedNotes == null)
@@ -29,8 +31,7 @@ namespace Business.Data
         }
 
 
-
-        private async Task AddAsync(NoteTake entry)
+        public async Task AddAsync(NoteTake entry)
         {
             await InitializeAsync();
 
@@ -50,16 +51,21 @@ namespace Business.Data
             }
         }
 
+
         public async Task<IEnumerable<NoteTake>> GetAllAsync()
         {
             await InitializeAsync();
             return loadedNotes.OrderByDescending(n => n.CreatedDate);
         }
+
+
         public async Task<NoteTake> GetByIDAsync(string id)
         {
             await InitializeAsync();
             return loadedNotes.SingleOrDefault(n => n.ID == id);
         }
+
+
         public async Task UpdateAsync(NoteTake entry)
         {
             await InitializeAsync();
@@ -69,6 +75,7 @@ namespace Business.Data
             }
             await SaveDataAsync(filename, loadedNotes);
         }
+
 
         private static async Task<IEnumerable<NoteTake>> ReadDataAsync(string filename)
         {
@@ -99,6 +106,7 @@ namespace Business.Data
                 });
             return result;
         }
+
 
         static async Task SaveDataAsync(string filename, IEnumerable<NoteTake> notes)
         {

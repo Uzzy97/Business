@@ -8,17 +8,17 @@ namespace Business.Data
 {
     public class MemoryEntryStorage : INoteEntryStorage
     {
-        private readonly Dictionary<string, NoteTake> enteries = new Dictionary<string, NoteTake>();
+        private readonly Dictionary<string, NoteTake> entries = new Dictionary<string, NoteTake>();
 
         public Task<IEnumerable<NoteTake>> GetAllAsync()
         {
-            IEnumerable<NoteTake> result = enteries.Values.ToList();
+            IEnumerable<NoteTake> result = entries.Values.ToList();
             return Task.FromResult(result);
         }
 
         public Task AddAsync (NoteTake entry)
         {
-            enteries.Add(entry.ID, entry);
+            entries.Add(entry.ID, entry);
             return Task.CompletedTask;
         }
 
@@ -29,14 +29,14 @@ namespace Business.Data
 
         public Task DeleteAsync(NoteTake entry)
         {
-            enteries.Remove(entry.ID);
+            entries.Remove(entry.ID);
             return Task.CompletedTask;
         }
 
         public Task<NoteTake> GetByIDAsync(string id)
         {
             NoteTake entry = null;
-            enteries.TryGetValue(id, out entry);
+            entries.TryGetValue(id, out entry);
             return Task.FromResult<NoteTake>(entry);
         }
     }

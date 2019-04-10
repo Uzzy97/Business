@@ -10,7 +10,6 @@ namespace Business.Data
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ID { get; set; }
-        //public object CreatedDate { get; internal set; }
 
         public NoteTake()
         {

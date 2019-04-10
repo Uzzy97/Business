@@ -26,6 +26,7 @@ namespace Business.Data
                 Title = "Sprint Retrospective",
                 Text = "1. Reflection 2. Actions"
             };
+
             Task.WhenAll(
                 store.AddAsync(a),
                 store.AddAsync(b),

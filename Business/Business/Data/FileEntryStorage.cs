@@ -18,7 +18,7 @@ namespace Business.Data
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
             if (string.IsNullOrEmpty(folder))
                 folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            this.filename = Path.Combine(folder, "meetings.xml");
+            this.filename = Path.Combine(folder, "business.xml");
         }
         private async Task InitializeAsync()
         {
@@ -34,8 +34,9 @@ namespace Business.Data
         {
             await InitializeAsync();
 
-            if (!loadedNotes.Remove(entry))
+            if (!loadedNotes.Any(ne => ne.ID == entry.ID))
             {
+                loadedNotes.Add(entry);
                 await SaveDataAsync(filename, loadedNotes);
             }
         }
@@ -102,7 +103,7 @@ namespace Business.Data
         static async Task SaveDataAsync(string filename, IEnumerable<NoteTake> notes)
         {
             XDocument root = new XDocument(
-                new XElement("minutes",
+                new XElement("business",
                 notes.Select(n =>
                 new XElement("entry",
                 new XAttribute("title", n.Title ?? ""),

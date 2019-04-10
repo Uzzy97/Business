@@ -13,13 +13,37 @@ namespace Business
         {
             InitializeComponent();
 
-            button.Clicked += Button_Clicked;
+            enteries.ItemTapped += OnItemTapped;
+            newEntry.Completed += OnAddNewEntry;
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            string name = entry.Text;
-            await DisplayAlert("Hi there", $"Hello {name}", "OK");
+            base.OnAppearing();
+            enteries.ItemsSource = await App.Entries.GetAllAsync();
+        }
+
+        private async void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var item = e.Item as INoteEntryStorage;
+            await Navigation.PushAsync(new NoteEntryEditPAge(item));
+        }
+
+
+        private async void OnAddNewEntry(object sender, EventArgs e)
+        {
+            string text = newEntry.Text;
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                var item = new NoteEntry { Title = text };
+                await App.Entries.AddAsync(item);
+                await Navigation.PushAsync(new NoteEntryEditPAge(item));
+                newEntry.Text = string.Empty;
+            }
         }
     }
 }
+
+        
+
+       

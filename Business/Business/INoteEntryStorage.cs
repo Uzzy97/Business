@@ -7,5 +7,6 @@ namespace Business
     public interface INoteEntryStorage
     {
         
+        
     }
 }

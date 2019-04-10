@@ -7,11 +7,18 @@ namespace Business
 {
     public partial class App : Application
     {
+        public static INoteEntryStorage Entries { get; set; }
+
         public App()
         {
             InitializeComponent();
+            Entries = new FileEntryStore();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new Business.MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#3498db"),
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()

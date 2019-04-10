@@ -3,12 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Business"
              x:Class="Business.MainPage"
-             Title="">
+             Title="Meeting Minutes"
+             NavigationPage.BackButtonTitle="Minutes"
+             Padding="20">
 
     <StackLayout>
-        <Label Text="Hiya, Please Enter Your Name" />
-        <Entry x:Name="entry"/>
-        <Button x:Name="button" Text="Submit"/>
-    </StackLayout>
 
+        <Entry x:Name="newEntry" Placeholder="Add a new Entry" Margin="0,0,0,20"/>
+        <ListView x:Name="enteries">
+            <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell
+                    Text="{Binding Title}"
+                    Detail="{Binding Text}"
+                    DetailColor="Goldenrod"/>
+            </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

@@ -48,6 +48,7 @@ namespace Business
             await Navigation.PushAsync(new Calculator());
 
         }
+
     }
 }
 

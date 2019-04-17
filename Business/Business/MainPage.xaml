@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Business"
              x:Class="Business.MainPage"
-             Title="Meeting Minutes"
-             NavigationPage.BackButtonTitle="Minutes"
+             Title="Notes"
+             NavigationPage.BackButtonTitle="Notes"
              Padding="20"
              BackgroundImage="Purple.jpg">
              
-
-    
 
 
     <StackLayout>

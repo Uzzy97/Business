@@ -9,5 +9,5 @@
             <Image x:Name="MyImage" HeightRequest="300" WidthRequest="300"/>
         </StackLayout>
     </ContentPage>
-    <ContentPage Title="Fuck Off" />
+    <ContentPage Title="Images" />
 </TabbedPage>
